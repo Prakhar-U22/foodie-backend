@@ -14,17 +14,21 @@ mongoDB().catch(err => console.error('Failed to connect to MongoDB', err));
 // Middleware to parse JSON bodies
 app.use(express.json());
 
+// // CORS Middleware
+// app.use((req, res, next) => {
+//   // Set allowed origin for CORS
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   next();
+// });
+
 // CORS Middleware
-app.use((req, res, next) => {
-  // Set allowed origin for CORS
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  next();
-});
+const cors = require("cors");
+app.use(cors());
 
 // Root route
 app.get('/', (req, res) => {
